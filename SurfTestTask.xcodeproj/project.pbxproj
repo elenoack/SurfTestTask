@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		048C505A299183460034E2B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C5059299183460034E2B9 /* AppDelegate.swift */; };
 		048C505C299183460034E2B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C505B299183460034E2B9 /* SceneDelegate.swift */; };
-		048C505E299183460034E2B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C505D299183460034E2B9 /* ViewController.swift */; };
-		048C5061299183460034E2B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048C505F299183460034E2B9 /* Main.storyboard */; };
+		048C505E299183460034E2B9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C505D299183460034E2B9 /* MainViewController.swift */; };
 		048C5063299183480034E2B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048C5062299183480034E2B9 /* Assets.xcassets */; };
 		048C5066299183480034E2B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048C5064299183480034E2B9 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -19,8 +18,7 @@
 		048C5056299183460034E2B9 /* SurfTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurfTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048C5059299183460034E2B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048C505B299183460034E2B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		048C505D299183460034E2B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		048C5060299183460034E2B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		048C505D299183460034E2B9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		048C5062299183480034E2B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		048C5065299183480034E2B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		048C5067299183480034E2B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +35,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0442B3912992359E00AA870F /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				048C5067299183480034E2B9 /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		0442B392299235AE00AA870F /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				048C5064299183480034E2B9 /* LaunchScreen.storyboard */,
+				048C5062299183480034E2B9 /* Assets.xcassets */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		048C504D299183460034E2B9 = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +71,37 @@
 		048C5058299183460034E2B9 /* SurfTestTask */ = {
 			isa = PBXGroup;
 			children = (
-				048C5059299183460034E2B9 /* AppDelegate.swift */,
-				048C505B299183460034E2B9 /* SceneDelegate.swift */,
-				048C505D299183460034E2B9 /* ViewController.swift */,
-				048C505F299183460034E2B9 /* Main.storyboard */,
-				048C5062299183480034E2B9 /* Assets.xcassets */,
-				048C5064299183480034E2B9 /* LaunchScreen.storyboard */,
-				048C5067299183480034E2B9 /* Info.plist */,
+				048C506F2991886D0034E2B9 /* Resources */,
+				048C506D299187320034E2B9 /* Sources */,
 			);
 			path = SurfTestTask;
+			sourceTree = "<group>";
+		};
+		048C506D299187320034E2B9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				048C506E299187490034E2B9 /* Application */,
+				048C505D299183460034E2B9 /* MainViewController.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		048C506E299187490034E2B9 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				048C5059299183460034E2B9 /* AppDelegate.swift */,
+				048C505B299183460034E2B9 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		048C506F2991886D0034E2B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0442B3912992359E00AA870F /* Configuration */,
+				0442B392299235AE00AA870F /* Supporting files */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,7 +140,7 @@
 				};
 			};
 			buildConfigurationList = 048C5051299183460034E2B9 /* Build configuration list for PBXProject "SurfTestTask" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -127,7 +164,6 @@
 			files = (
 				048C5066299183480034E2B9 /* LaunchScreen.storyboard in Resources */,
 				048C5063299183480034E2B9 /* Assets.xcassets in Resources */,
-				048C5061299183460034E2B9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048C505E299183460034E2B9 /* ViewController.swift in Sources */,
+				048C505E299183460034E2B9 /* MainViewController.swift in Sources */,
 				048C505A299183460034E2B9 /* AppDelegate.swift in Sources */,
 				048C505C299183460034E2B9 /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +183,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		048C505F299183460034E2B9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				048C5060299183460034E2B9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		048C5064299183480034E2B9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,12 +317,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4PMA8ARP43;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SurfTestTask/Info.plist;
+				INFOPLIST_FILE = SurfTestTask/Resources/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +331,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.SurfTestTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -317,12 +349,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4PMA8ARP43;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SurfTestTask/Info.plist;
+				INFOPLIST_FILE = SurfTestTask/Resources/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +363,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.SurfTestTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
