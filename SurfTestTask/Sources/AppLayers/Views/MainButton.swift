@@ -13,7 +13,36 @@ enum MainButtonType {
 }
 
 final class MainButton: UIButton {
+
+    // MARK: - Properties
     private var mainButtonType: MainButtonType
+
+    override var isHighlighted: Bool {
+        willSet {
+            switch mainButtonType {
+            case .request:
+                titleLabel?.textColor = Constants.Colors.darkGrey
+            case .response:
+                setTitleColor(Constants.Colors.darkGrey, for: .highlighted)
+
+            }
+        }
+    }
+
+//    override var isSelected: Bool {
+//        willSet {
+//            switch mainButtonType {
+//            case .request:
+//                print("isSelected")
+//                titleLabel?.textColor = Constants.Colors.darkGrey
+//            case .response:
+//                print("cxc")
+//                titleLabel?.textColor = Constants.Colors.darkGrey
+//                backgroundColor = Constants.Colors.darkGrey
+//            }
+//        }
+//    }
+
 
     // MARK: - Initialization
     init(mainButtonType: MainButtonType) {
@@ -30,12 +59,14 @@ final class MainButton: UIButton {
     private func setupView() {
         switch mainButtonType {
         case .request:
+            isEnabled = true
             layer.cornerRadius = 60/2
             setTitle(Constants.Strings.requestButtonTitle, for: .normal)
             setTitleColor(Constants.Colors.darkGrey, for: .normal)
             titleLabel?.font = Constants.Fonts.title
             setContentHuggingPriority(.defaultHigh, for: .horizontal)
         case .response:
+            isEnabled = true
             layer.cornerRadius = 60/2
             setTitle(Constants.Strings.responseButtonTitle, for: .normal)
             setTitleColor(Constants.Colors.background, for: .normal)

@@ -15,6 +15,9 @@ enum Constants {
         static let requestButtonTitle: String = "Хочешь к нам?"
         static let responseButtonTitle: String = "Отправить заявку"
         static let mainTitle: String = "Стажировка в Surf"
+        static let congratulations: String = "Поздравляем!"
+        static let alertMessage: String = "Ваша заявка успешно отправлена!"
+        static let close: String = "Закрыть"
     }
 
     // MARK: - Fonts
@@ -25,7 +28,6 @@ enum Constants {
 
     // MARK: - Size
     enum Size {
-
         static let inset: CGFloat = 20
     }
 
