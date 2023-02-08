@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0416BDD12994059F008D47FB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416BDD02994059F008D47FB /* MainPresenter.swift */; };
 		0442B39929923A1D00AA870F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B39829923A1D00AA870F /* MainView.swift */; };
 		0442B39B29923C6500AA870F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B39A29923C6500AA870F /* MainButton.swift */; };
 		0442B39E29923D9300AA870F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B39D29923D9300AA870F /* Constants.swift */; };
@@ -21,6 +22,7 @@
 		0442B3B62992CB6A00AA870F /* MainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B3B52992CB6A00AA870F /* MainLabel.swift */; };
 		0442B3B82992DDB400AA870F /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B3B72992DDB400AA870F /* ContainerView.swift */; };
 		0442B3BB2992E8F600AA870F /* AssemblerBilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B3BA2992E8F600AA870F /* AssemblerBilder.swift */; };
+		047641C2299429E000554C8D /* Alert+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047641C1299429E000554C8D /* Alert+Extensions.swift */; };
 		048C505A299183460034E2B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C5059299183460034E2B9 /* AppDelegate.swift */; };
 		048C505C299183460034E2B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C505B299183460034E2B9 /* SceneDelegate.swift */; };
 		048C505E299183460034E2B9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C505D299183460034E2B9 /* MainViewController.swift */; };
@@ -29,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0416BDD02994059F008D47FB /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		0442B39829923A1D00AA870F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; tabWidth = 3; };
 		0442B39A29923C6500AA870F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		0442B39D29923D9300AA870F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 		0442B3B52992CB6A00AA870F /* MainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLabel.swift; sourceTree = "<group>"; };
 		0442B3B72992DDB400AA870F /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		0442B3BA2992E8F600AA870F /* AssemblerBilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblerBilder.swift; sourceTree = "<group>"; };
+		047641C1299429E000554C8D /* Alert+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Extensions.swift"; sourceTree = "<group>"; };
 		048C5056299183460034E2B9 /* SurfTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurfTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048C5059299183460034E2B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048C505B299183460034E2B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 				0442B39F29923F9200AA870F /* UIView+Autolayout.swift */,
 				0442B3A1299247A800AA870F /* UIColor+Extensions.swift */,
 				0442B3A52992533500AA870F /* UICollectionView+Reuse.swift */,
+				047641C1299429E000554C8D /* Alert+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 				0442B3AA2992671000AA870F /* Subviews */,
 				048C505D299183460034E2B9 /* MainViewController.swift */,
 				0442B39829923A1D00AA870F /* MainView.swift */,
+				0416BDD02994059F008D47FB /* MainPresenter.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -317,10 +323,12 @@
 				0442B39B29923C6500AA870F /* MainButton.swift in Sources */,
 				0442B3B22992820100AA870F /* DataManger.swift in Sources */,
 				0442B3B82992DDB400AA870F /* ContainerView.swift in Sources */,
+				0416BDD12994059F008D47FB /* MainPresenter.swift in Sources */,
 				0442B39E29923D9300AA870F /* Constants.swift in Sources */,
 				0442B3A62992533500AA870F /* UICollectionView+Reuse.swift in Sources */,
 				0442B3A82992599600AA870F /* CollectionCell.swift in Sources */,
 				0442B3BB2992E8F600AA870F /* AssemblerBilder.swift in Sources */,
+				047641C2299429E000554C8D /* Alert+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
