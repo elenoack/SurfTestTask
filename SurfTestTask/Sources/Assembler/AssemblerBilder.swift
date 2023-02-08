@@ -9,18 +9,18 @@ import UIKit
 
 // MARK: - AssemblyBuilderProtocol
 protocol AssemblyBuilderProtocol {
-//    func configureMainModule() -> UIViewController
+    func configureMainModule() -> UIViewController
 }
 
 // MARK: - AssemblyBuilder
 final class AssemblerBuilder: AssemblyBuilderProtocol {
 
-//    func configureNewsMainModule() -> UIViewController {
-//        let dataManger = DataManger()
-//        let presenter = MainPresenter(dataManger: dataManger)
-//        let view = MainViewController(presenter: presenter)
-//        presenter.view = view
-//        return view
-//    }
+    func configureMainModule() -> UIViewController {
+        let dataManger = DataManger() 
+        let presenter = MainPresenter(dataManager: dataManger)
+        let view = MainViewController(presenter: presenter)
+        presenter.view = view
+        return view
+    }
 
 }
