@@ -7,6 +7,16 @@
 
 import UIKit
 
+// MARK: - CollectionViewHeaderConfigurableProtocol
+protocol CollectionViewHeaderConfigurableProtocol where Self: UICollectionReusableView {
+    func configure(with viewModel: ViewModel?)
+}
+
+// MARK: - CollectionViewHeaderModel
+struct CollectionViewHeaderModel: ViewModel {
+    let description: String?
+}
+
 final class HeaderView: UICollectionReusableView {
 
     static let id = "Header"
@@ -43,6 +53,16 @@ extension HeaderView {
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
+    }
+
+}
+
+// MARK: - CollectionViewHeaderConfigurableProtocol
+extension HeaderView: CollectionViewHeaderConfigurableProtocol {
+
+    func configure(with viewModel: ViewModel?) {
+        guard let viewModel = viewModel as? CollectionViewHeaderModel else { return }
+        self.titleLabel.text = viewModel.description
     }
 
 }

@@ -15,9 +15,11 @@ final class ContainerView: UIView {
             frame: .zero,
             collectionViewLayout: createLayout())
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.id)
+        collectionView.allowsMultipleSelection = true
         collectionView.register(CollectionCell.self)
-        collectionView.registerHeader(HeaderView.self)
+//        collectionView.registerHeader(HeaderView.self)
         collectionView.showsVerticalScrollIndicator = false
+        let configuration = UICollectionViewCompositionalLayoutConfiguration()
         return collectionView
     }()
 
@@ -112,15 +114,18 @@ extension ContainerView {
 
     private func singleSection() -> NSCollectionLayoutSection {
 
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(44), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(44),
+                                              heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 6,
             leading: 0,
             bottom: 0,
             trailing: 0)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(44), heightDimension: .absolute(50))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(44),
+                                               heightDimension: .absolute(50))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 6,
@@ -131,7 +136,7 @@ extension ContainerView {
         section.interGroupSpacing = 12
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(80))
+            heightDimension: .estimated(80))
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
@@ -147,32 +152,133 @@ extension ContainerView {
     }
 
     private func doubleSection() -> NSCollectionLayoutSection {
+//        let estimatedWidth: CGFloat = 200
+//
+//            let itemSize = NSCollectionLayoutSize(
+//                widthDimension: .estimated(estimatedWidth),
+//                heightDimension: .absolute(50)
+//            )
+//            // height is absolute because I know it, and in some cases not in this one,
+//            // though I have to calculate the height of UICollectionView
+//            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//
+//            item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
+//                leading: .fixed(0),
+//                top: .fixed(8),
+//                trailing: .fixed(8),
+//                bottom: .fixed(8)
+//            )
+//
+//            let groupSize = NSCollectionLayoutSize(
+//                widthDimension: .fractionalWidth(1.0),
+//                heightDimension: .estimated(50)
+//            )
+//            let group = NSCollectionLayoutGroup.horizontal(
+//                layoutSize: groupSize,
+//                subitems: [item]
+//            )
+//            group.contentInsets = NSDirectionalEdgeInsets(
+//                top: 0,
+//                leading: 16,
+//                bottom: 0,
+//                trailing: 16
+//            )
+//
+//            let section = NSCollectionLayoutSection(group: group)
+//            section.contentInsets = NSDirectionalEdgeInsets(
+//                top: 0,
+//                leading: 0,
+//                bottom: 20,
+//                trailing: 0
+//            )
+//        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
 
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(44), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(
-            top: 12,
-            leading: 0,
-            bottom: 0,
-            trailing: 0)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(44), heightDimension: .absolute(55))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 2)
+//           let itemSize = NSCollectionLayoutSize(
+//            widthDimension: .estimated(44),
+//            heightDimension: .fractionalHeight(1)
+//           )
+//
+//           let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//
+//           item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
+//               leading: .fixed(0),
+//               top: .fixed(6),
+//               trailing: .fixed(0),
+//               bottom: .fixed(6)
+//           )
+//
+//           let groupSize = NSCollectionLayoutSize(
+//            widthDimension: .estimated(10),
+//            heightDimension: .absolute(55)
+//           )
+//
+//           let group = NSCollectionLayoutGroup.vertical(
+//            layoutSize: groupSize,
+//            repeatingSubitem: item,
+//            count: 2
+//           )
+//
+////        let group = NSCollectionLayoutGroup.horizontal(
+////                      layoutSize: groupSize,
+////                      subitems: [item]
+////                  )
+////        group.interItemSpacing = .fixed(-5)
+//           group.contentInsets = NSDirectionalEdgeInsets(
+//               top: 0,
+//               leading: 0,
+//               bottom: 0,
+//               trailing: 0
+//           )
+//
+//           let section = NSCollectionLayoutSection(group: group)
+//           section.contentInsets = NSDirectionalEdgeInsets(
+//               top: 0,
+//               leading: 0,
+//               bottom: 20,
+//               trailing: 0
+//           )
+//        section.orthogonalScrollingBehavior = .paging
+        
+//             let estimatedHeight: CGFloat = 50
+//              let estimatedWidth: CGFloat = 44
+//              let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
+//                                                    heightDimension: .estimated(estimatedHeight))
+//              let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//              item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil,
+//                                                               top: nil,
+//                                                               trailing: .fixed(8),
+//                                                               bottom: nil)
+//        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(1000),
+//                                                     heightDimension: .estimated(estimatedHeight))
+//        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 2)
+//
+//              let section = NSCollectionLayoutSection(group: group)
+//              section.orthogonalScrollingBehavior = .continuous
+//              section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0)
 
-        // item spacing
-        //        group.interItemSpacing = .fixed(12)
+        let layoutSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(60),
+            heightDimension: .absolute(50)
+        )
 
-        // group spacing
+// отставила для одиночной.
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(50)
+            ),
+            subitems: [.init(layoutSize: layoutSize)]
+        )
+
+
+        group.interItemSpacing = .fixed(12)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 12,
-            leading: 0,
-            bottom: 0,
-            trailing: 0)
-        section.interGroupSpacing = 12
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
+        section.interGroupSpacing = 0
+//        section.orthogonalScrollingBehavior = .continuous
+
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -181,6 +287,10 @@ extension ContainerView {
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
+        header.contentInsets = NSDirectionalEdgeInsets(top: 12,
+                                                       leading: 0,
+                                                       bottom: 12,
+                                                       trailing: 0)
         header.zIndex = Int.max
         section.boundarySupplementaryItems = [header]
         return section

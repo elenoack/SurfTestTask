@@ -7,17 +7,41 @@
 
 import UIKit
 
-final class CollectionCell: UICollectionViewCell {
+// MARK: - ViewModel
+protocol ViewModel {}
 
+// MARK: - CollectionViewCellConfigurableProtocol
+protocol CollectionViewCellConfigurableProtocol where Self: UICollectionViewCell {
+    func configure(with viewModel: ViewModel?)
+}
+
+// MARK: - CollectionViewCellModel
+struct CollectionViewCellModel: ViewModel {
+    let content: String?
+}
+
+// MARK: - CollectionCell
+final class CollectionCell: UICollectionViewCell {
+    
+    // MARK: - Properties
+    private var cellColor: Bool { return self.backgroundColor == Constants.Colors.darkGrey }
+    
+    override var isSelected: Bool {
+        didSet {
+            if cellColor {
+                backgroundColor = Constants.Colors.lightGray
+                dataLabel.textColor = Constants.Colors.darkGrey
+            } else {
+                backgroundColor = Constants.Colors.darkGrey
+                dataLabel.textColor = Constants.Colors.lightGray
+            }
+        }
+        
+    }
+    
     // MARK: - Views
     lazy var dataLabel = MainLabel(mainLabelType: .content)
-
-    var isEnabled: Bool = false {
-        didSet {
-            backgroundColor = Constants.Colors.darkGrey
-        }
-    }
-
+    
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -26,14 +50,16 @@ final class CollectionCell: UICollectionViewCell {
         setupHierachy()
         setupLayout()
     }
-
+    
     required init?(coder Decoder: NSCoder) {
         fatalError(Constants.Strings.initError)
     }
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         dataLabel.text = nil
+        backgroundColor = Constants.Colors.lightGray
+        dataLabel.textColor = Constants.Colors.darkGrey
     }
     
 }
@@ -46,14 +72,23 @@ extension CollectionCell {
             dataLabel
         ])
     }
-
+    
     func setupLayout() {
         NSLayoutConstraint.activate([
             dataLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             dataLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             dataLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            dataLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 44)
         ])
     }
+    
+}
 
+// MARK: - CollectionViewCellConfigurableProtocol
+extension CollectionCell: CollectionViewCellConfigurableProtocol {
+    
+    func configure(with viewModel: ViewModel?) {
+        guard let viewModel = viewModel as? CollectionViewCellModel else { return }
+        self.dataLabel.text = viewModel.content
+    }
+    
 }
