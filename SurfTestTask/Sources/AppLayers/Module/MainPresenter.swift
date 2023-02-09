@@ -31,7 +31,7 @@ extension MainPresenter {
 
     func fetchData() {
        let model = dataManager.createModels()
-           prepareDataToConfigure(responce: model)
+           prepareDataToConfigure(responce: .init(result: model))
    }
 
 }
@@ -39,15 +39,15 @@ extension MainPresenter {
 // MARK: - Private
 extension MainPresenter {
 
-    private func prepareDataToConfigure(responce: [ContentModel]) {
+    private func prepareDataToConfigure(responce: SurfDTO.GetContent.Response) {
         var cellViewModels = [[ViewModel]]()
-        responce.forEach {
+        responce.result.forEach {
             let cellViewModel: [ViewModel] = $0.direction.map {
                 return CollectionViewCellModel(content: $0.rawValue)
             }
             cellViewModels.append(cellViewModel)
         }
-        var headerViewModel: [ViewModel] = responce.map {
+        let headerViewModel: [ViewModel] = responce.result.map {
             return CollectionViewHeaderModel(description: $0.description)
         }
         view?.configureView(with: cellViewModels,
