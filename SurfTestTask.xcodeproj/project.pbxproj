@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0416BDD12994059F008D47FB /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416BDD02994059F008D47FB /* MainPresenter.swift */; };
+		04303B96299531F30074A9B3 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04303B93299531F30074A9B3 /* SFProDisplay-Bold.ttf */; };
+		04303B97299531F30074A9B3 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04303B94299531F30074A9B3 /* SFProDisplay-Regular.ttf */; };
+		04303B98299531F30074A9B3 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04303B95299531F30074A9B3 /* SFProDisplay-Medium.ttf */; };
+		04303B9C2995544E0074A9B3 /* SurfDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04303B9B2995544E0074A9B3 /* SurfDTO.swift */; };
 		0442B39929923A1D00AA870F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B39829923A1D00AA870F /* MainView.swift */; };
 		0442B39B29923C6500AA870F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B39A29923C6500AA870F /* MainButton.swift */; };
 		0442B39E29923D9300AA870F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B39D29923D9300AA870F /* Constants.swift */; };
@@ -32,6 +36,10 @@
 
 /* Begin PBXFileReference section */
 		0416BDD02994059F008D47FB /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		04303B93299531F30074A9B3 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		04303B94299531F30074A9B3 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		04303B95299531F30074A9B3 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		04303B9B2995544E0074A9B3 /* SurfDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfDTO.swift; sourceTree = "<group>"; };
 		0442B39829923A1D00AA870F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; tabWidth = 3; };
 		0442B39A29923C6500AA870F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		0442B39D29923D9300AA870F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -67,6 +75,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04303B92299531BF0074A9B3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				04303B93299531F30074A9B3 /* SFProDisplay-Bold.ttf */,
+				04303B95299531F30074A9B3 /* SFProDisplay-Medium.ttf */,
+				04303B94299531F30074A9B3 /* SFProDisplay-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		04303B99299532020074A9B3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0442B39D29923D9300AA870F /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		04303B9A2995542A0074A9B3 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				04303B9B2995544E0074A9B3 /* SurfDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		0442B3912992359E00AA870F /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,9 +112,9 @@
 		0442B392299235AE00AA870F /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				04303B92299531BF0074A9B3 /* Fonts */,
 				048C5064299183480034E2B9 /* LaunchScreen.storyboard */,
 				048C5062299183480034E2B9 /* Assets.xcassets */,
-				0442B39D29923D9300AA870F /* Constants.swift */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -109,6 +143,7 @@
 		0442B395299239EB00AA870F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				04303B9A2995542A0074A9B3 /* DTO */,
 				0442B3AA2992671000AA870F /* Subviews */,
 				048C505D299183460034E2B9 /* MainViewController.swift */,
 				0442B39829923A1D00AA870F /* MainView.swift */,
@@ -234,6 +269,7 @@
 		048C506F2991886D0034E2B9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				04303B99299532020074A9B3 /* Helpers */,
 				0442B3912992359E00AA870F /* Configuration */,
 				0442B392299235AE00AA870F /* Supporting files */,
 			);
@@ -298,8 +334,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04303B96299531F30074A9B3 /* SFProDisplay-Bold.ttf in Resources */,
 				048C5066299183480034E2B9 /* LaunchScreen.storyboard in Resources */,
 				048C5063299183480034E2B9 /* Assets.xcassets in Resources */,
+				04303B97299531F30074A9B3 /* SFProDisplay-Regular.ttf in Resources */,
+				04303B98299531F30074A9B3 /* SFProDisplay-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +368,7 @@
 				0442B3A82992599600AA870F /* CollectionCell.swift in Sources */,
 				0442B3BB2992E8F600AA870F /* AssemblerBilder.swift in Sources */,
 				047641C2299429E000554C8D /* Alert+Extensions.swift in Sources */,
+				04303B9C2995544E0074A9B3 /* SurfDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
