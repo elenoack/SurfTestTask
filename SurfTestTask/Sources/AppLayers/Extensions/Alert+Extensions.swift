@@ -19,7 +19,7 @@ extension UIViewController {
             alert.addAction(action)
         }
         if actions.isEmpty {
-            alert.addAction(UIAlertAction(title: Constants.Strings.close, style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: Strings.close, style: .cancel, handler: nil))
         }
 
         present(alert, animated: true, completion: nil)

@@ -37,12 +37,11 @@ extension UICollectionView {
                                    for: indexPath) as? T ?? T()
     }
     
-    func dequeueReusableHeader<T: UICollectionReusableView>(_ viewClass: T.Type,
-                                                            for indexPath: IndexPath) -> T {
-        return dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: viewClass.reuseIdentifier,
-            for: indexPath) as? T ?? T()
+    func dequeueReusableHeader(_ viewClass: UICollectionReusableView.Type,
+                               for indexPath: IndexPath) -> UICollectionReusableView {
+        return dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                withReuseIdentifier: viewClass.reuseIdentifier,
+                                                for: indexPath)
     }
     
 }
