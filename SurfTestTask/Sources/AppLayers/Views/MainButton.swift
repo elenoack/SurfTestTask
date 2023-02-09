@@ -18,31 +18,16 @@ final class MainButton: UIButton {
     private var mainButtonType: MainButtonType
 
     override var isHighlighted: Bool {
-        willSet {
+        didSet {
             switch mainButtonType {
-            case .request:
-                titleLabel?.textColor = Constants.Colors.darkGrey
             case .response:
-                setTitleColor(Constants.Colors.darkGrey, for: .highlighted)
-
+                setTitleColor(Colors.darkGray, for: .highlighted)
+                backgroundColor = isHighlighted ? Colors.lightGray : Colors.darkGray
+            case .request:
+                break
             }
         }
     }
-
-//    override var isSelected: Bool {
-//        willSet {
-//            switch mainButtonType {
-//            case .request:
-//                print("isSelected")
-//                titleLabel?.textColor = Constants.Colors.darkGrey
-//            case .response:
-//                print("cxc")
-//                titleLabel?.textColor = Constants.Colors.darkGrey
-//                backgroundColor = Constants.Colors.darkGrey
-//            }
-//        }
-//    }
-
 
     // MARK: - Initialization
     init(mainButtonType: MainButtonType) {
@@ -52,7 +37,7 @@ final class MainButton: UIButton {
     }
 
     required init?(coder: NSCoder) {
-        fatalError(Constants.Strings.initError)
+        fatalError(Strings.initError)
     }
 
     // MARK: - Configuration
@@ -61,17 +46,17 @@ final class MainButton: UIButton {
         case .request:
             isEnabled = true
             layer.cornerRadius = 60/2
-            setTitle(Constants.Strings.requestButtonTitle, for: .normal)
-            setTitleColor(Constants.Colors.darkGrey, for: .normal)
-            titleLabel?.font = Constants.Fonts.title
+            setTitle(Strings.requestButtonTitle, for: .normal)
+            setTitleColor(Colors.darkGray, for: .normal)
+            titleLabel?.font = Fonts.title
             setContentHuggingPriority(.defaultHigh, for: .horizontal)
         case .response:
             isEnabled = true
             layer.cornerRadius = 60/2
-            setTitle(Constants.Strings.responseButtonTitle, for: .normal)
-            setTitleColor(Constants.Colors.background, for: .normal)
-            titleLabel?.font = Constants.Fonts.title
-            backgroundColor = Constants.Colors.darkGrey
+            setTitle(Strings.responseButtonTitle, for: .normal)
+            setTitleColor(Colors.background, for: .normal)
+            titleLabel?.font = Fonts.buttonTitle
+            backgroundColor = Colors.darkGray
         }
     }
 

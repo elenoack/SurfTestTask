@@ -32,7 +32,7 @@ final class HeaderView: UICollectionReusableView {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("Not implemented")
+        fatalError(Strings.initError)
     }
     
 }

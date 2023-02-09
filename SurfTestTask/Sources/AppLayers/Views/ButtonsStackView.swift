@@ -9,9 +9,18 @@ import UIKit
 
 final class ButtonsStackView: UIStackView {
 
+    // MARK: - Action
+    static var responseCompletion: (() -> Void)?
+
     // MARK: - Views
-    private lazy var requestButton = MainButton(mainButtonType: .request)
-    private lazy var responseButton = MainButton(mainButtonType: .response)
+    private lazy var requestButton: MainButton = MainButton(mainButtonType: .request)
+    private lazy var responseButton: MainButton = {
+        let button = MainButton(mainButtonType: .response)
+        button.addTarget(self,
+                         action: #selector(handleResponse),
+                         for: .touchUpInside)
+        return button
+    }()
 
     // MARK: - Initialization
     init() {
@@ -21,7 +30,7 @@ final class ButtonsStackView: UIStackView {
     }
 
     required init(coder: NSCoder) {
-        fatalError(Constants.Strings.initError)
+        fatalError(Strings.initError)
     }
 
     // MARK: - Configuration
@@ -35,8 +44,18 @@ final class ButtonsStackView: UIStackView {
     private func setupView() {
         alignment = .fill
         distribution = .fill
-        spacing = Constants.Size.inset
+        spacing = 20
         axis = .horizontal
+    }
+
+}
+
+// MARK: - Private
+extension ButtonsStackView {
+
+    @objc
+    private func handleResponse() {
+        ButtonsStackView.responseCompletion?()
     }
 
 }

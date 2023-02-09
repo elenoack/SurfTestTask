@@ -24,7 +24,7 @@ final class MainLabel: UILabel {
     }
     
     required init?(coder: NSCoder) {
-        fatalError(Constants.Strings.initError)
+        fatalError(Strings.initError)
     }
     
     // MARK: - Configuration
@@ -32,18 +32,18 @@ final class MainLabel: UILabel {
         switch mainLabelType {
         case .title:
             textAlignment = .left
-            font = Constants.Fonts.mainTitle
-            textColor = Constants.Colors.darkGrey
-            text = Constants.Strings.mainTitle
+            font = Fonts.mainTitle
+            textColor = Colors.darkGray
+            text = Strings.mainTitle
         case .description:
             textAlignment = .left
-            font = Constants.Fonts.title
+            font = Fonts.title
             numberOfLines = 0
-            textColor = Constants.Colors.gray
+            textColor = Colors.gray
         case .content:
             textAlignment = .left
-            font = Constants.Fonts.title
-            textColor = Constants.Colors.darkGrey
+            font = Fonts.cellName
+            textColor = Colors.darkGray
         }
     }
     

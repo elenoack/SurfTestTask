@@ -34,7 +34,7 @@ final class MainViewController: UIViewController {
     }
 
     required init?(coder: NSCoder) {
-        fatalError(Constants.Strings.initError)
+        fatalError(Strings.initError)
     }
     
     // MARK: - View Life Cycle
@@ -44,8 +44,10 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.fetchData()
         setupCollectionView()
         setupPanGesture()
+        handleCompletion()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,8 +57,8 @@ final class MainViewController: UIViewController {
     
     // MARK: - Configuration
     func setupCollectionView() {
-        presenter?.fetchData()
         mainView?.containerView.collectionView.dataSource = self
+//        mainView?.containerView.collectionView.delegate = self
     }
 
 }
@@ -86,10 +88,10 @@ extension MainViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         switch section {
         case .single:
-            let viewModel = cellViewModel.first?[indexPath.item]
+            let viewModel = cellViewModel.first?[indexPath.row]
             cell.configure(with: viewModel)
         case .double:
-            let viewModel = cellViewModel.last?[indexPath.item]
+            let viewModel = cellViewModel.last?[indexPath.row]
             cell.configure(with: viewModel)
         }
         return cell
@@ -98,9 +100,8 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-//        let headerView = collectionView.dequeueReusableHeader(HeaderView.self, for: indexPath)
-                guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderView.id, for: indexPath) as? HeaderView else {
-                    return HeaderView() }
+        guard let headerView = collectionView.dequeueReusableHeader(HeaderView.self, for: indexPath)
+                as? HeaderView else { return HeaderView() }
         guard let section = Sections(rawValue: indexPath.section) else { return UICollectionReusableView() }
         switch section {
         case .single:
@@ -113,25 +114,43 @@ extension MainViewController: UICollectionViewDataSource {
 
 }
 
+// MARK: - UICollectionViewDelegate
+extension MainViewController: UICollectionViewDelegate {
+
+
+}
+
 // MARK: - Private
 extension MainViewController {
 
-    private func getCountForDoubleSection() -> Int {
-        guard let count = cellViewModel.last?.count
-        else { return 0 }
-        if count % 2 == 0 && count < 6 {
-            return count
-        } else {
-            return 0
-        }
-    }
-    
     private func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(gesture:)))
         panGesture.delaysTouchesBegan = false
         panGesture.delaysTouchesEnded = false
         mainView?.containerView.addGestureRecognizer(panGesture)
     }
+
+    private func handleCompletion() {
+        ButtonsStackView.responseCompletion = { [weak self] in
+            self?.showAlert(title: Strings.congratulations,
+                      message: Strings.alertMessage)
+        }
+    }
+
+    private func getCountForDoubleSection() -> Int {
+        guard let count = cellViewModel.last?.count
+        else { return 0 }
+        if count % 2 == 0 && count <= 10 {
+            return count
+        } else {
+            return 0
+        }
+    }
+
+}
+
+// MARK: - Animation
+extension MainViewController {
 
     private func animateContainerHeight(_ height: CGFloat) {
         UIView.animate(withDuration: 0.4) {

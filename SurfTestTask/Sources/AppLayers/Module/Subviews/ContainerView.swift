@@ -12,19 +12,18 @@ final class ContainerView: UIView {
     // MARK: - Views
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
-            frame: .zero,
+            frame: self.bounds,
             collectionViewLayout: createLayout())
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.id)
         collectionView.allowsMultipleSelection = true
         collectionView.register(CollectionCell.self)
-//        collectionView.registerHeader(HeaderView.self)
+        collectionView.registerHeader(HeaderView.self)
         collectionView.showsVerticalScrollIndicator = false
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         return collectionView
     }()
 
-    private lazy var titleLabel = MainLabel(mainLabelType: .title)
     private lazy var stackView = ButtonsStackView()
+    private lazy var titleLabel = MainLabel(mainLabelType: .title)
 
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -35,14 +34,14 @@ final class ContainerView: UIView {
     }
 
     required init?(coder: NSCoder) {
-        fatalError(Constants.Strings.initError)
+        fatalError(Strings.initError)
     }
 
     // MARK: - Configuration
     private func setupView() {
-        layer.cornerRadius = 26
+        layer.cornerRadius = Constants.viewCornerRadius
         clipsToBounds = true
-        backgroundColor = Constants.Colors.background
+        backgroundColor = Colors.background
     }
 
     private func setupHierarchy() {
@@ -56,27 +55,28 @@ final class ContainerView: UIView {
     private func setupLayout() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor,
-                                            constant: 24),
+                                            constant: Constants.insetTop),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                constant: Constants.Size.inset),
+                                                constant: Constants.inset),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                 constant: -Constants.Size.inset),
+                                                 constant: -Constants.inset),
 
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
+                                                constant: Constants.insetInside),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                    constant: Constants.Size.inset),
+                                                    constant: Constants.inset),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                     constant: -Constants.Size.inset),
+                                                     constant: -Constants.inset),
             collectionView.bottomAnchor.constraint(equalTo: stackView.topAnchor,
-                                                   constant: -32),
+                                                   constant: -Constants.insetBottom),
 
             stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor,
-                                              constant:  -Constants.Size.inset),
-            stackView.heightAnchor.constraint(equalToConstant: 60),
+                                              constant: -Constants.inset),
+            stackView.heightAnchor.constraint(equalToConstant: Constants.buttomHeight),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                               constant: Constants.Size.inset),
+                                               constant: Constants.inset),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                constant: -Constants.Size.inset),
+                                                constant: -Constants.inset),
         ])
     }
 
@@ -114,188 +114,103 @@ extension ContainerView {
 
     private func singleSection() -> NSCollectionLayoutSection {
 
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(44),
-                                              heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(Constants.cellWight),
+            heightDimension: .fractionalHeight(1)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(
-            top: 6,
-            leading: 0,
-            bottom: 0,
-            trailing: 0)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(44),
-                                               heightDimension: .absolute(50))
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(Constants.cellWight),
+            heightDimension: .absolute(Constants.cellHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                       subitems: [item])
+                                                       subitems: [item]
+        )
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
-            top: 6,
-            leading: 0,
-            bottom: 0,
-            trailing: 0)
+            top: Constants.insetInside,
+            leading: .zero,
+            bottom: .zero,
+            trailing: .zero)
         section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 12
+        section.interGroupSpacing = Constants.insetInside
+        section.contentInsets.bottom = Constants.insetTop
         let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(80))
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(Constants.headerHeight)
+        )
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
-        header.contentInsets = NSDirectionalEdgeInsets(top: 12,
-                                                       leading: 0,
-                                                       bottom: 12,
-                                                       trailing: 0)
-        header.zIndex = Int.max
+
         section.boundarySupplementaryItems = [header]
         return section
-
     }
 
     private func doubleSection() -> NSCollectionLayoutSection {
-//        let estimatedWidth: CGFloat = 200
-//
-//            let itemSize = NSCollectionLayoutSize(
-//                widthDimension: .estimated(estimatedWidth),
-//                heightDimension: .absolute(50)
-//            )
-//            // height is absolute because I know it, and in some cases not in this one,
-//            // though I have to calculate the height of UICollectionView
-//            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//
-//            item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-//                leading: .fixed(0),
-//                top: .fixed(8),
-//                trailing: .fixed(8),
-//                bottom: .fixed(8)
-//            )
-//
-//            let groupSize = NSCollectionLayoutSize(
-//                widthDimension: .fractionalWidth(1.0),
-//                heightDimension: .estimated(50)
-//            )
-//            let group = NSCollectionLayoutGroup.horizontal(
-//                layoutSize: groupSize,
-//                subitems: [item]
-//            )
-//            group.contentInsets = NSDirectionalEdgeInsets(
-//                top: 0,
-//                leading: 16,
-//                bottom: 0,
-//                trailing: 16
-//            )
-//
-//            let section = NSCollectionLayoutSection(group: group)
-//            section.contentInsets = NSDirectionalEdgeInsets(
-//                top: 0,
-//                leading: 0,
-//                bottom: 20,
-//                trailing: 0
-//            )
-//        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-
-
-//           let itemSize = NSCollectionLayoutSize(
-//            widthDimension: .estimated(44),
-//            heightDimension: .fractionalHeight(1)
-//           )
-//
-//           let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//
-//           item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-//               leading: .fixed(0),
-//               top: .fixed(6),
-//               trailing: .fixed(0),
-//               bottom: .fixed(6)
-//           )
-//
-//           let groupSize = NSCollectionLayoutSize(
-//            widthDimension: .estimated(10),
-//            heightDimension: .absolute(55)
-//           )
-//
-//           let group = NSCollectionLayoutGroup.vertical(
-//            layoutSize: groupSize,
-//            repeatingSubitem: item,
-//            count: 2
-//           )
-//
-////        let group = NSCollectionLayoutGroup.horizontal(
-////                      layoutSize: groupSize,
-////                      subitems: [item]
-////                  )
-////        group.interItemSpacing = .fixed(-5)
-//           group.contentInsets = NSDirectionalEdgeInsets(
-//               top: 0,
-//               leading: 0,
-//               bottom: 0,
-//               trailing: 0
-//           )
-//
-//           let section = NSCollectionLayoutSection(group: group)
-//           section.contentInsets = NSDirectionalEdgeInsets(
-//               top: 0,
-//               leading: 0,
-//               bottom: 20,
-//               trailing: 0
-//           )
-//        section.orthogonalScrollingBehavior = .paging
-        
-//             let estimatedHeight: CGFloat = 50
-//              let estimatedWidth: CGFloat = 44
-//              let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
-//                                                    heightDimension: .estimated(estimatedHeight))
-//              let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//              item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil,
-//                                                               top: nil,
-//                                                               trailing: .fixed(8),
-//                                                               bottom: nil)
-//        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(1000),
-//                                                     heightDimension: .estimated(estimatedHeight))
-//        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 2)
-//
-//              let section = NSCollectionLayoutSection(group: group)
-//              section.orthogonalScrollingBehavior = .continuous
-//              section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0)
 
         let layoutSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(60),
-            heightDimension: .absolute(50)
+            widthDimension: .estimated(Constants.cellWight),
+            heightDimension: .absolute(Constants.cellHeight)
         )
-
-// отставила для одиночной.
-        let group = NSCollectionLayoutGroup.horizontal(
+        let item = NSCollectionLayoutItem(layoutSize: layoutSize)
+        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
+            leading: nil,
+            top: .fixed(Constants.insetInside),
+            trailing: .fixed(Constants.insetInside),
+            bottom: nil
+        )
+        let subGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(50)
+                heightDimension: .estimated(Constants.cellHeight)
             ),
-            subitems: [.init(layoutSize: layoutSize)]
+            subitems: [item]
         )
+        let groupHeight = (Constants.cellHeight * 2) + (Constants.insetInside + 2)
+        let groupLayoutSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.5), // 600
+            heightDimension: .estimated(groupHeight))
 
-
-        group.interItemSpacing = .fixed(12)
-
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupLayoutSize,
+            repeatingSubitem: subGroup,
+            count: 2
+        )
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
-        section.interGroupSpacing = 0
-//        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .continuous
 
+//        section.visibleItemsInvalidationHandler = { [weak self] visibleItems, point, environment in
+//            self?.currentIndex = visibleItems.last?.indexPath.row
+//            print(self?.currentIndex)
+//        }
 
         let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(80))
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(Constants.headerHeight)
+        )
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
-        header.contentInsets = NSDirectionalEdgeInsets(top: 12,
-                                                       leading: 0,
-                                                       bottom: 12,
-                                                       trailing: 0)
-        header.zIndex = Int.max
         section.boundarySupplementaryItems = [header]
         return section
     }
 
 }
 
+// MARK: - ConstantsSize
+fileprivate enum Constants {
 
+    static let viewCornerRadius: CGFloat = 26
+    static let cellWight: CGFloat = 68
+    static let cellHeight: CGFloat = 44
+    static let insetTop: CGFloat = 24
+    static let insetBottom: CGFloat = 32
+    static let inset: CGFloat = 20
+    static let buttomHeight: CGFloat = 60
+    static let insetInside: CGFloat = 12
+    static let headerHeight: CGFloat = 80
+    
+}

@@ -24,16 +24,16 @@ struct CollectionViewCellModel: ViewModel {
 final class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
-    private var cellColor: Bool { return self.backgroundColor == Constants.Colors.darkGrey }
+    private var cellColor: Bool { return self.backgroundColor == Colors.darkGray }
     
     override var isSelected: Bool {
         didSet {
             if cellColor {
-                backgroundColor = Constants.Colors.lightGray
-                dataLabel.textColor = Constants.Colors.darkGrey
+                backgroundColor = Colors.lightGray
+                dataLabel.textColor = Colors.darkGray
             } else {
-                backgroundColor = Constants.Colors.darkGrey
-                dataLabel.textColor = Constants.Colors.lightGray
+                backgroundColor = Colors.darkGray
+                dataLabel.textColor = Colors.lightGray
             }
         }
         
@@ -45,21 +45,21 @@ final class CollectionCell: UICollectionViewCell {
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        backgroundColor = Constants.Colors.lightGray
+        backgroundColor = Colors.lightGray
         layer.cornerRadius = 12
         setupHierachy()
         setupLayout()
     }
     
     required init?(coder Decoder: NSCoder) {
-        fatalError(Constants.Strings.initError)
+        fatalError(Strings.initError)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         dataLabel.text = nil
-        backgroundColor = Constants.Colors.lightGray
-        dataLabel.textColor = Constants.Colors.darkGrey
+        backgroundColor = Colors.lightGray
+        dataLabel.textColor = Colors.darkGray
     }
     
 }
