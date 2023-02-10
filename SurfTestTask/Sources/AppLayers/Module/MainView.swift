@@ -17,7 +17,7 @@ final class MainView: UIView {
     // MARK: - Views
     lazy var backgroundImage: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "backgroundImage")
+        view.image = Images.background
         return view
     }()
 
@@ -53,7 +53,8 @@ final class MainView: UIView {
     private func setupLayout() {
         NSLayoutConstraint.activate([
             backgroundImage.topAnchor.constraint(equalTo: topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -184),
+            backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                                    constant: -184),
             backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImage.trailingAnchor.constraint(equalTo: trailingAnchor),
 

@@ -36,9 +36,9 @@ final class CollectionCell: UICollectionViewCell {
                 dataLabel.textColor = Colors.lightGray
             }
         }
-        
+
     }
-    
+
     // MARK: - Views
     lazy var dataLabel = MainLabel(mainLabelType: .content)
     
@@ -57,9 +57,9 @@ final class CollectionCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        dataLabel.text = nil
         backgroundColor = Colors.lightGray
         dataLabel.textColor = Colors.darkGray
+        dataLabel.text = nil
     }
     
 }

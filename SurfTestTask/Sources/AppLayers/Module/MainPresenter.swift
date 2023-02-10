@@ -10,6 +10,7 @@ import Foundation
 // MARK: - MainPresenterInputProtocol
 protocol MainPresenterInputProtocol: AnyObject {
     func fetchData()
+    func getModelCount() -> Int 
 }
 
 // MARK: - MainPresenter
@@ -18,6 +19,7 @@ final class MainPresenter: MainPresenterInputProtocol {
     // MARK: - Properties
     weak var view: MainPresenterOutputProtocol?
     private let dataManager: DataManagerProtocol
+    private var model = [ContentModel]()
 
     //MARK: - Initialization
     init(dataManager: DataManagerProtocol) {
@@ -30,9 +32,13 @@ final class MainPresenter: MainPresenterInputProtocol {
 extension MainPresenter {
 
     func fetchData() {
-       let model = dataManager.createModels()
+       model = dataManager.createModels()
            prepareDataToConfigure(responce: .init(result: model))
    }
+
+    func getModelCount() -> Int {
+        !model.isEmpty ? model.count : 0
+    }
 
 }
 
@@ -50,7 +56,11 @@ extension MainPresenter {
         let headerViewModel: [ViewModel] = responce.result.map {
             return CollectionViewHeaderModel(description: $0.description)
         }
-        view?.configureView(with: cellViewModels,
+
+        guard let singleCellViewModel = cellViewModels.first,
+              let doubleCellViewModel = cellViewModels.last else { return }
+        view?.configureView(with: singleCellViewModel,
+                            with: doubleCellViewModel,
                             and: headerViewModel)
     }
 

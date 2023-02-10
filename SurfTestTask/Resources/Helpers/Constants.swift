@@ -33,3 +33,8 @@ enum Colors {
     static let darkGray = UIColor(hex: "#313131")
     static let lightGray = UIColor(hex: "#F3F3F5")
 }
+
+// MARK: - Images
+enum Images {
+    static let background = UIImage(named: "backgroundImage")
+}

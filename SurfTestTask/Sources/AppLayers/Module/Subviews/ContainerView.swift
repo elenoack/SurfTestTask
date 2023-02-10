@@ -8,6 +8,9 @@
 import UIKit
 
 final class ContainerView: UIView {
+
+    // MARK: - Properties
+    var countOfDoubleVM = 0
     
     // MARK: - Views
     lazy var collectionView: UICollectionView = {
@@ -18,6 +21,9 @@ final class ContainerView: UIView {
         collectionView.register(CollectionCell.self)
         collectionView.registerHeader(HeaderView.self)
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = true
+        collectionView.semanticContentAttribute = .forceLeftToRight
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         return collectionView
     }()
@@ -115,13 +121,13 @@ extension ContainerView {
     private func singleSection() -> NSCollectionLayoutSection {
 
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(Constants.cellWight),
+            widthDimension: .estimated(Constants.cellWidth),
             heightDimension: .fractionalHeight(1)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(Constants.cellWight),
+            widthDimension: .estimated(Constants.cellWidth),
             heightDimension: .absolute(Constants.cellHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item]
@@ -151,7 +157,7 @@ extension ContainerView {
     private func doubleSection() -> NSCollectionLayoutSection {
 
         let layoutSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(Constants.cellWight),
+            widthDimension: .estimated(Constants.cellWidth),
             heightDimension: .absolute(Constants.cellHeight)
         )
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
@@ -169,8 +175,12 @@ extension ContainerView {
             subitems: [item]
         )
         let groupHeight = (Constants.cellHeight * 2) + (Constants.insetInside + 2)
+
+        let cellsWidth = CGFloat(countOfDoubleVM)/2
+        let groupWidth = cellsWidth * Constants.cellWidthMax + Constants.insetInside * cellsWidth + Constants.inset * 4
+
         let groupLayoutSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.5), // 600
+            widthDimension: .absolute(groupWidth),
             heightDimension: .estimated(groupHeight))
 
         let group = NSCollectionLayoutGroup.vertical(
@@ -180,11 +190,6 @@ extension ContainerView {
         )
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-
-//        section.visibleItemsInvalidationHandler = { [weak self] visibleItems, point, environment in
-//            self?.currentIndex = visibleItems.last?.indexPath.row
-//            print(self?.currentIndex)
-//        }
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
@@ -200,11 +205,11 @@ extension ContainerView {
 
 }
 
-// MARK: - ConstantsSize
+// MARK: - Constants
 fileprivate enum Constants {
-
     static let viewCornerRadius: CGFloat = 26
-    static let cellWight: CGFloat = 68
+    static let cellWidth: CGFloat = 68
+    static let cellWidthMax: CGFloat = 80
     static let cellHeight: CGFloat = 44
     static let insetTop: CGFloat = 24
     static let insetBottom: CGFloat = 32
@@ -212,5 +217,4 @@ fileprivate enum Constants {
     static let buttomHeight: CGFloat = 60
     static let insetInside: CGFloat = 12
     static let headerHeight: CGFloat = 80
-    
 }

@@ -5,7 +5,7 @@
 //  Created by Elena Noack on 07.02.23.
 //
 
-import UIKit
+import Foundation
 
 // MARK: - DataManagerProtocol
 protocol DataManagerProtocol {

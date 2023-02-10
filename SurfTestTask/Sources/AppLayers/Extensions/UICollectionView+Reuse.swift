@@ -39,9 +39,10 @@ extension UICollectionView {
     
     func dequeueReusableHeader(_ viewClass: UICollectionReusableView.Type,
                                for indexPath: IndexPath) -> UICollectionReusableView {
-        return dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
-                                                withReuseIdentifier: viewClass.reuseIdentifier,
-                                                for: indexPath)
+        return dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: viewClass.reuseIdentifier,
+            for: indexPath)
     }
     
 }

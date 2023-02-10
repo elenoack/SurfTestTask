@@ -19,8 +19,6 @@ struct CollectionViewHeaderModel: ViewModel {
 
 final class HeaderView: UICollectionReusableView {
 
-    static let id = "Header"
-
     // MARK: - Views
     lazy var titleLabel = MainLabel(mainLabelType: .description)
 
