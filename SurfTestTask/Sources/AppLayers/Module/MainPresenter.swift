@@ -52,7 +52,7 @@ extension MainPresenter {
         let headerViewModel: [ViewModel] = responce.result.map {
             return CollectionViewHeaderModel(description: $0.description)
         }
-print(headerViewModel)
+
         guard let singleCellViewModel = cellViewModels.first,
               let doubleCellViewModel = cellViewModels.last else { return }
         view?.configureView(with: singleCellViewModel,

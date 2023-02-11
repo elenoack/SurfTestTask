@@ -87,7 +87,6 @@ final class ContainerView: UIView {
 }
 
 // MARK: - UICollectionViewLayout
-
 extension ContainerView {
 
     private func createLayout() -> UICollectionViewLayout {
@@ -112,8 +111,7 @@ extension ContainerView {
 
 }
 
-// MARK: - NSCollectionLayoutSection - FirstSection
-
+// MARK: - NSCollectionLayoutSection
 extension ContainerView {
 
     private func singleSection() -> NSCollectionLayoutSection {

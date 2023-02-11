@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - DataManagerProtocol
+// MARK: - MockDataServiceProtocol
 protocol MockDataServiceProtocol {
     func createModels() -> [ContentModel]
 }
