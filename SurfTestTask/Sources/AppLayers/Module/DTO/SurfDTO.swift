@@ -16,6 +16,7 @@ enum SurfDTO {
         struct Response {
             let result: [ContentModel]
         }
+
         struct ViewModel {}
     }
 

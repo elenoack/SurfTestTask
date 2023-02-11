@@ -12,8 +12,16 @@ struct ContentModel {
     let direction: [Types]
 
     enum Types: String {
-      case iOS, Android, Design, QA, Flutter, PM, Frontend,
-           Backend, React, Ruby
+        case ios = "iOS"
+        case android = "Android"
+        case design = "Design"
+        case flutter = "Flutter"
+        case qa = "QA"
+        case pm = "PM"
+        case frontend = "Frontend"
+        case backend = "Backend"
+        case react = "React"
+        case ruby = "Ruby"
     }
 
 }

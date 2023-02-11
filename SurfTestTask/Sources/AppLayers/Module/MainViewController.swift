@@ -12,6 +12,7 @@ protocol MainPresenterOutputProtocol: AnyObject {
     func configureView(with singleCellViewModel: [ViewModel],
                        with doubleCellViewModel: [ViewModel],
                        and headerViewModel: [ViewModel])
+    func setNumberOfSections(number: Int)
 }
 
 final class MainViewController: UIViewController {
@@ -21,6 +22,7 @@ final class MainViewController: UIViewController {
     private var singleCellViewModel = [ViewModel]()
     private var doubleCellViewModel = [ViewModel]()
     private var headerViewModel = [ViewModel]()
+    private var numberOfSections = 0
 
     // MARK: - Views
     private var mainView: MainView? {
@@ -68,7 +70,7 @@ final class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return presenter?.getModelCount() ?? 0
+        return numberOfSections
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -78,7 +80,6 @@ extension MainViewController: UICollectionViewDataSource {
             return singleCellViewModel.count
         case .double:
             return getCountForDoubleSection()
-
         }
     }
     
@@ -104,11 +105,12 @@ extension MainViewController: UICollectionViewDataSource {
         guard let headerView = collectionView.dequeueReusableHeader(HeaderView.self, for: indexPath)
                 as? HeaderView else { return HeaderView() }
         guard let section = Sections(rawValue: indexPath.section) else { return UICollectionReusableView() }
+        let viewModel = headerViewModel[indexPath.section]
         switch section {
         case .single:
-            headerView.configure(with: headerViewModel[indexPath.row])
+            headerView.configure(with: viewModel)
         case .double:
-            headerView.configure(with: headerViewModel[indexPath.row])
+            headerView.configure(with: viewModel)
         }
         return headerView
     }
@@ -144,52 +146,7 @@ extension MainViewController: UICollectionViewDelegate {
                 )
             })
         }
-
     }
-
-    //      func collectionView(_ collectionView: UICollectionView,
-    //                        willDisplay cell: UICollectionViewCell,
-    //                        forItemAt indexPath: IndexPath) {
-    //        guard let section = Sections(rawValue: indexPath.section)
-    //          else { return }
-    //        switch section {
-    //        case .single:
-    //            if indexPath.item == 0 {
-    //                print("first")
-    //            } else if indexPath.item == (cellViewModel.first?.count ?? 0) - 1 {
-    //                let firstIndexPath = IndexPath(item: (cellViewModel.first?.count ?? 0) - 2, section: 0)
-    //                mainView?.containerView.collectionView.scrollToItem(at: firstIndexPath, at: .left, animated: false)
-    //            }
-    ////            let lastItemIndex = (cellViewModel.first?.count ?? 0 ) / 2 - 2
-    ////            print(indexPath.item)
-    ////            if indexPath.item == lastItemIndex {
-    ////
-    ////                let firstIndexPath = IndexPath(item: 0, section: 0)
-    ////                mainView?.containerView.collectionView.scrollToItem(at: firstIndexPath, at: .left, animated: false)
-    //
-    //        case .double:
-    //            let lastItemIndex = (cellViewModel.last?.count ?? 0 / 2) + 1
-    //            if indexPath.item == lastItemIndex {
-    //
-    //                let firstIndexPath = IndexPath(item: 0, section: 1)
-    //                mainView?.containerView.collectionView.scrollToItem(at: firstIndexPath, at: .left, animated: false)
-    //            }
-    //        }
-    //    }
-    //
-    //    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    //        let pageFloat = (scrollView.contentOffset.x / scrollView.frame.size.width)
-    //        let pageInt = Int(round(pageFloat))
-    //print(pageFloat)
-    //        switch pageInt {
-    ////        case 0:
-    ////            mainView?.containerView.collectionView.scrollToItem(at: IndexPath(item: 3, section: 0), at: .left, animated: false)
-    ////        case list.count - 1:
-    ////            mainView?.containerView.collectionView..scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: false)
-    //        default:
-    //            break
-    //        }
-    //    }
 
 }
 
@@ -212,11 +169,8 @@ extension MainViewController {
 
     private func getCountForDoubleSection() -> Int {
         let count = doubleCellViewModel.count
-        if count % 2 == 0 && count <= 10 {
+        guard count % 2 == 0 && count <= 10 else { return 0 }
             return count
-        } else {
-            return 0
-        }
     }
 
 }
@@ -275,6 +229,10 @@ extension MainViewController {
 // MARK: - MainPresenterOutputProtocol
 extension MainViewController: MainPresenterOutputProtocol {
 
+    func setNumberOfSections(number: Int) {
+        numberOfSections = number
+    }
+
     func configureView(with singleCellViewModel: [ViewModel],
                        with doubleCellViewModel: [ViewModel],
                        and headerViewModel: [ViewModel]) {
@@ -282,7 +240,9 @@ extension MainViewController: MainPresenterOutputProtocol {
         self.doubleCellViewModel = doubleCellViewModel
         mainView?.containerView.countOfDoubleVM = doubleCellViewModel.count
         self.headerViewModel = headerViewModel
-        mainView?.containerView.collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.mainView?.containerView.collectionView.reloadData()
+        }
     }
 
 }

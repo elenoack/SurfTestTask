@@ -15,15 +15,18 @@ extension UIViewController {
         let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
+
         for action in actions {
             alert.addAction(action)
         }
-        if actions.isEmpty {
-            alert.addAction(UIAlertAction(title: Strings.close, style: .cancel, handler: nil))
-        }
 
+        if actions.isEmpty {
+            alert.addAction(UIAlertAction(title: Strings.close,
+                                          style: .cancel,
+                                          handler: nil)
+            )
+        }
         present(alert, animated: true, completion: nil)
     }
 
 }
-

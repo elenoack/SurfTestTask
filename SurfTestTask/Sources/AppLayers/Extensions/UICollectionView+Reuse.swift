@@ -24,9 +24,11 @@ extension UICollectionView {
     }
 
     func registerHeader(_ viewClass: UICollectionReusableView.Type) {
-        register(viewClass,
-                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                 withReuseIdentifier: viewClass.reuseIdentifier)
+        register(
+            viewClass,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: viewClass.reuseIdentifier
+        )
     }
 
     func dequeueReusableCell<T: UICollectionViewCell>(
@@ -42,7 +44,8 @@ extension UICollectionView {
         return dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: viewClass.reuseIdentifier,
-            for: indexPath)
+            for: indexPath
+        )
     }
     
 }

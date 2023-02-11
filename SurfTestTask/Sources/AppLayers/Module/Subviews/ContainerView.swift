@@ -23,8 +23,6 @@ final class ContainerView: UIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
-        collectionView.semanticContentAttribute = .forceLeftToRight
-        let configuration = UICollectionViewCompositionalLayoutConfiguration()
         return collectionView
     }()
 
@@ -128,7 +126,8 @@ extension ContainerView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .estimated(Constants.cellWidth),
-            heightDimension: .absolute(Constants.cellHeight))
+            heightDimension: .absolute(Constants.cellHeight)
+        )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item]
         )
@@ -148,8 +147,8 @@ extension ContainerView {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top)
-
+            alignment: .top
+        )
         section.boundarySupplementaryItems = [header]
         return section
     }
@@ -181,8 +180,8 @@ extension ContainerView {
 
         let groupLayoutSize = NSCollectionLayoutSize(
             widthDimension: .absolute(groupWidth),
-            heightDimension: .estimated(groupHeight))
-
+            heightDimension: .estimated(groupHeight)
+        )
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: groupLayoutSize,
             repeatingSubitem: subGroup,

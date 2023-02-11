@@ -1,5 +1,5 @@
 //
-//  DataManger.swift
+//  MockDataService.swift
 //  SurfTestTask
 //
 //  Created by Elena Noack on 07.02.23.
@@ -8,20 +8,20 @@
 import Foundation
 
 // MARK: - DataManagerProtocol
-protocol DataManagerProtocol {
+protocol MockDataServiceProtocol {
     func createModels() -> [ContentModel]
 }
 
-// MARK: - DataManger
-final class DataManger: DataManagerProtocol {
-    
+// MARK: - MockService
+final class MockDataService: MockDataServiceProtocol {
+
     func createModels() -> [ContentModel] {
         return [
             ContentModel(description: "Работай над реальными задачами под руководством опытного наставника и получи возможность стать частью команды мечты.",
-                         direction: [.iOS, .Android, .Design, .QA, .Flutter, .PM]),
+                         direction: [.ios, .android, .design, .qa, .flutter, .pm]),
             ContentModel(description: "Получай стипендию, выстраивай удобный график, работай на современном железе.",
-                         direction: [.iOS, .Android, .QA, .Design, .Flutter, .Frontend, .Backend, .PM, .React, .Ruby])
+                         direction: [.ios, .android, .qa, .design, .pm, .flutter, .frontend, .backend, .react, .ruby])
         ]
     }
-    
+
 }

@@ -10,7 +10,6 @@ import Foundation
 // MARK: - MainPresenterInputProtocol
 protocol MainPresenterInputProtocol: AnyObject {
     func fetchData()
-    func getModelCount() -> Int 
 }
 
 // MARK: - MainPresenter
@@ -18,12 +17,11 @@ final class MainPresenter: MainPresenterInputProtocol {
 
     // MARK: - Properties
     weak var view: MainPresenterOutputProtocol?
-    private let dataManager: DataManagerProtocol
-    private var model = [ContentModel]()
+    private let dataService: MockDataServiceProtocol
 
     //MARK: - Initialization
-    init(dataManager: DataManagerProtocol) {
-        self.dataManager = dataManager
+    init(dataService: MockDataServiceProtocol) {
+        self.dataService = dataService
     }
 
 }
@@ -32,12 +30,10 @@ final class MainPresenter: MainPresenterInputProtocol {
 extension MainPresenter {
 
     func fetchData() {
-       model = dataManager.createModels()
-           prepareDataToConfigure(responce: .init(result: model))
-   }
-
-    func getModelCount() -> Int {
-        !model.isEmpty ? model.count : 0
+        DispatchQueue.global().async { 
+            let model = self.dataService.createModels()
+            self.prepareDataToConfigure(responce: .init(result: model))
+        }
     }
 
 }
@@ -56,12 +52,13 @@ extension MainPresenter {
         let headerViewModel: [ViewModel] = responce.result.map {
             return CollectionViewHeaderModel(description: $0.description)
         }
-
+print(headerViewModel)
         guard let singleCellViewModel = cellViewModels.first,
               let doubleCellViewModel = cellViewModels.last else { return }
         view?.configureView(with: singleCellViewModel,
                             with: doubleCellViewModel,
                             and: headerViewModel)
+        view?.setNumberOfSections(number: cellViewModels.count)
     }
 
 }

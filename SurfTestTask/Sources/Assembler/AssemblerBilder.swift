@@ -16,8 +16,8 @@ protocol AssemblyBuilderProtocol {
 final class AssemblerBuilder: AssemblyBuilderProtocol {
 
     func configureMainModule() -> UIViewController {
-        let dataManger = DataManger() 
-        let presenter = MainPresenter(dataManager: dataManger)
+        let dataService = MockDataService()
+        let presenter = MainPresenter(dataService: dataService)
         let view = MainViewController(presenter: presenter)
         presenter.view = view
         return view

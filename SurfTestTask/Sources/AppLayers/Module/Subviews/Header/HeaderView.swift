@@ -17,6 +17,7 @@ struct CollectionViewHeaderModel: ViewModel {
     let description: String?
 }
 
+// MARK: - HeaderView
 final class HeaderView: UICollectionReusableView {
 
     // MARK: - Views

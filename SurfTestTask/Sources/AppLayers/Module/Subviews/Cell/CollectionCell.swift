@@ -24,19 +24,13 @@ struct CollectionViewCellModel: ViewModel {
 final class CollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
-    private var cellColor: Bool { return self.backgroundColor == Colors.darkGray }
+    private var isCellColor: Bool { return self.backgroundColor == Colors.darkGray }
     
     override var isSelected: Bool {
         didSet {
-            if cellColor {
-                backgroundColor = Colors.lightGray
-                dataLabel.textColor = Colors.darkGray
-            } else {
-                backgroundColor = Colors.darkGray
-                dataLabel.textColor = Colors.lightGray
-            }
+            backgroundColor = isCellColor ? Colors.lightGray : Colors.darkGray
+            dataLabel.textColor = isCellColor ? Colors.lightGray : Colors.darkGray
         }
-
     }
 
     // MARK: - Views
