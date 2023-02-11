@@ -42,4 +42,4 @@
 
 |      Screen     | 
 |:---------------:|
-|![Screen](/Users/mac/Movies/Movavi Library/Simulator Screen Recording - iPhone 14 Pro - 2023-02-11 at 16.28.28.gif)|
+|![Simulator Screen Recording - iPhone 14 Pro - 2023-02-11 at 16 28 28](https://user-images.githubusercontent.com/96373604/218261045-5fe99972-87d9-49d5-b59e-7190c007eb64.gif)|
